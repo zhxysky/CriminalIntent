@@ -1,5 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
+import java.text.SimpleDateFormat;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -59,7 +61,7 @@ public class CrimeFragment extends Fragment {
 		
 		//引用新添加的按钮
 		mDateButton = (Button) v.findViewById(R.id.crime_date);
-		mDateButton.setText(mCrime.getDate().toString());
+		mDateButton.setText((new SimpleDateFormat("MM/dd/yy h:mmaa")).format(mCrime.getDate()));
 		mDateButton.setEnabled(false);
 		
 		
