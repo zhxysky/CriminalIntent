@@ -53,6 +53,9 @@ public class Crime {
 		mId = id;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return mTitle;
+	}
 	
 }

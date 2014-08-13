@@ -22,37 +22,25 @@ import android.view.ViewGroup;
  * @author w3
  *
  */
-public class CrimeActivity extends FragmentActivity {
+public class CrimeActivity extends SingleFragmentActivity {
+
+//	@Override
+//	public void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
+//		setContentView(R.layout.activity_fragment);
+//		FragmentManager fm = getSupportFragmentManager();
+//		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
+//		
+//		if(fragment == null) {
+//			fragment = new CrimeFragment();
+//			fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
+//		}
+//	}
+
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_crime);
-		FragmentManager fm = getSupportFragmentManager();
-		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
-		
-		if(fragment == null) {
-			fragment = new CrimeFragment();
-			fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
-		}
-	}
-
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_crime,
-					container, false);
-			return rootView;
-		}
+	protected Fragment createFragment() {
+		return new CrimeFragment();
 	}
 
 }
