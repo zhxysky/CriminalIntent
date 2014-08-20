@@ -26,20 +26,7 @@ import android.view.ViewGroup;
  */
 public class CrimeActivity extends SingleFragmentActivity {
 
-//	@Override
-//	public void onCreate(Bundle savedInstanceState) {
-//		super.onCreate(savedInstanceState);
-//		setContentView(R.layout.activity_fragment);
-//		FragmentManager fm = getSupportFragmentManager();
-//		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
-//		
-//		if(fragment == null) {
-//			fragment = new CrimeFragment();
-//			fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
-//		}
-//	}
-
-
+	//创建Fragment的时候调用Fragment的newInstance方法获取实例
 	@Override
 	protected Fragment createFragment() {
 //		return new CrimeFragment();

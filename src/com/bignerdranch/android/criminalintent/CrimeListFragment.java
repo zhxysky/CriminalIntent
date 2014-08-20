@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -41,6 +42,16 @@ public class CrimeListFragment extends ListFragment {
 		
 	}
 	
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+		((CrimeAdapter) getListAdapter()).notifyDataSetChanged(); //刷新显示列表
+	}
+	
+	
+
 	
 	private class CrimeAdapter extends ArrayAdapter<Crime> {
 		public CrimeAdapter(ArrayList<Crime> crimes) {
@@ -65,5 +76,6 @@ public class CrimeListFragment extends ListFragment {
 			return convertView;
 		}
 	}
+	
 	
 }
