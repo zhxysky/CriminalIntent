@@ -1,8 +1,6 @@
 package com.bignerdranch.android.criminalintent;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.UUID;
 
 import android.app.Activity;

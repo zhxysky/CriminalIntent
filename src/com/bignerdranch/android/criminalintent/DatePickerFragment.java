@@ -18,7 +18,6 @@ public class DatePickerFragment extends DialogFragment {
 	
 	public static final String EXTRA_DATE = "com.bignerdranch.android.criminalintent.date";
 	
-	//private Date mDate;
 	private Calendar mCalendar;
 	
 	
@@ -47,8 +46,6 @@ public class DatePickerFragment extends DialogFragment {
 		
 		mCalendar = (Calendar) getArguments().getSerializable(EXTRA_DATE);
 		
-//		Calendar calendar = Calendar.getInstance();
-//		calendar.setTime(mDate);
 		int year = mCalendar.get(Calendar.YEAR);
 		int month = mCalendar.get(Calendar.MONTH);
 		int day = mCalendar.get(Calendar.DAY_OF_MONTH);
@@ -61,8 +58,6 @@ public class DatePickerFragment extends DialogFragment {
 			
 			@Override
 			public void onDateChanged(DatePicker view, int year, int month, int day) {
-				// TODO Auto-generated method stub
-				//mDate = new GregorianCalendar(year, month, day).getTime();
 				mCalendar = new GregorianCalendar(year, month, day,mCalendar.get(Calendar.HOUR),mCalendar.get(Calendar.MINUTE),mCalendar.get(Calendar.SECOND));
 				getArguments().putSerializable(EXTRA_DATE, mCalendar);
 			}
@@ -70,7 +65,6 @@ public class DatePickerFragment extends DialogFragment {
 		
 		return new AlertDialog.Builder(getActivity()).setView(v)
 				.setTitle(R.string.data_picker_title)
-				//.setPositiveButton(android.R.string.ok, null).create();
 				.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
 					
 					@Override

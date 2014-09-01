@@ -1,8 +1,6 @@
 package com.bignerdranch.android.criminalintent;
 
-import java.sql.Time;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import android.app.Activity;
@@ -48,8 +46,6 @@ public class TimePickerFragment extends DialogFragment {
 
 		mCalendar = (Calendar) getArguments().getSerializable(EXTRA_DATE);
 
-		// Calendar calendar = Calendar.getInstance();
-		// calendar.setTime(mDate);
 		int hour = mCalendar.get(Calendar.HOUR);
 		int minute = mCalendar.get(Calendar.MINUTE);
 
