@@ -1,6 +1,7 @@
 package com.bignerdranch.android.criminalintent;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -31,6 +32,7 @@ public class CrimeFragment extends Fragment {
 	private  Crime mCrime;
 	private EditText mTitleField;
 	private Button mDateButton;
+	private Button mTimeButton;
 	private CheckBox mSolvedCheckBox;
 	
 	private static final String DIALOG_DATE = "date";
@@ -83,13 +85,25 @@ public class CrimeFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				FragmentManager fm = getActivity().getSupportFragmentManager();
-				DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
+				DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getCalendar());
 				dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
 				dialog.show(fm, DIALOG_DATE);
 				
 			}
 		});
 		
+		mTimeButton = (Button) v.findViewById(R.id.crime_time);
+		updateTime();
+		mTimeButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				FragmentManager fm = getActivity().getSupportFragmentManager();
+				TimePickerFragment timeDialog = TimePickerFragment.newInstance(mCrime.getCalendar());
+				timeDialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+				timeDialog.show(fm, DIALOG_DATE);
+			}
+		});
 		
 		mSolvedCheckBox = (CheckBox) v.findViewById(R.id.crime_solved);
 		mSolvedCheckBox.setChecked(mCrime.isSolved());
@@ -108,15 +122,20 @@ public class CrimeFragment extends Fragment {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode != Activity.RESULT_OK) return;
 		if(requestCode == REQUEST_DATE) {
-			Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-			mCrime.setDate(date);
+			Calendar calendar = (Calendar) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+			mCrime.setCalendar(calendar);
 			updateDate();
+			updateTime();
 		}
 	}
 	
 	
 	public void updateDate() {
-		mDateButton.setText(mCrime.getDate().toString());
+		mDateButton.setText(CalendarUtil.formatCalendarDate(mCrime.getCalendar()));
+	}
+	
+	public void updateTime() {
+		mTimeButton.setText(CalendarUtil.formatCalendarTime(mCrime.getCalendar()));
 	}
 	
 	public static CrimeFragment newInstance(UUID crimeId) {

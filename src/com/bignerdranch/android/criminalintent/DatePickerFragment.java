@@ -1,7 +1,6 @@
 package com.bignerdranch.android.criminalintent;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import android.app.Activity;
@@ -19,12 +18,13 @@ public class DatePickerFragment extends DialogFragment {
 	
 	public static final String EXTRA_DATE = "com.bignerdranch.android.criminalintent.date";
 	
-	private Date mDate;
+	//private Date mDate;
+	private Calendar mCalendar;
 	
 	
-	public static DatePickerFragment newInstance(Date date) {
+	public static DatePickerFragment newInstance(Calendar calendar) {
 		Bundle args = new Bundle();
-		args.putSerializable(EXTRA_DATE, date);
+		args.putSerializable(EXTRA_DATE, calendar);
 		
 		DatePickerFragment fragment = new DatePickerFragment();
 		fragment.setArguments(args);
@@ -37,7 +37,7 @@ public class DatePickerFragment extends DialogFragment {
 		if(getTargetFragment() == null)
 			return;
 		Intent i = new Intent();
-		i.putExtra(EXTRA_DATE, mDate);
+		i.putExtra(EXTRA_DATE, mCalendar);
 		
 		getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, i);
 	}
@@ -45,13 +45,13 @@ public class DatePickerFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		
-		mDate = (Date) getArguments().getSerializable(EXTRA_DATE);
+		mCalendar = (Calendar) getArguments().getSerializable(EXTRA_DATE);
 		
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(mDate);
-		int year = calendar.get(Calendar.YEAR);
-		int month = calendar.get(Calendar.MONTH);
-		int day = calendar.get(Calendar.DAY_OF_MONTH);
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.setTime(mDate);
+		int year = mCalendar.get(Calendar.YEAR);
+		int month = mCalendar.get(Calendar.MONTH);
+		int day = mCalendar.get(Calendar.DAY_OF_MONTH);
 		
 		//获取日期对话框
 		View v = getActivity().getLayoutInflater().inflate(R.layout.dialog_date, null);
@@ -62,9 +62,9 @@ public class DatePickerFragment extends DialogFragment {
 			@Override
 			public void onDateChanged(DatePicker view, int year, int month, int day) {
 				// TODO Auto-generated method stub
-				mDate = new GregorianCalendar(year, month, day).getTime();
-				
-				getArguments().putSerializable(EXTRA_DATE, mDate);
+				//mDate = new GregorianCalendar(year, month, day).getTime();
+				mCalendar = new GregorianCalendar(year, month, day,mCalendar.get(Calendar.HOUR),mCalendar.get(Calendar.MINUTE),mCalendar.get(Calendar.SECOND));
+				getArguments().putSerializable(EXTRA_DATE, mCalendar);
 			}
 		});
 		
